@@ -31,8 +31,6 @@ RUN apt-get install -y wget \
                        gcc \
                        gnupg
 
-RUN 
-
 RUN bash /opt/install_irods.sh && \
     apt-get update && \
     mkdir -p /root/.irods && \
