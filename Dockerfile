@@ -33,13 +33,11 @@ RUN apt-get install -y wget \
 
 RUN bash /opt/install_irods.sh
 
-RUN [ -s /home/extractor/packages.txt ] && \
-    (echo 'Installing packages' && \
+RUN [(echo 'Installing packages' && \
         apt-get update && \
-        cat /home/extractor/packages.txt | xargs apt-get install -y --no-install-recommends && \
+        # cat /opt/packages.txt | xargs apt-get install -y --no-install-recommends && \
         mkdir -p /root/.irods && \
         echo "{ \"irods_zone_name\": \"iplant\", \"irods_host\": \"data.cyverse.org\", \"irods_port\": 1247, \"irods_user_name\": \"$IRODS_USER\" }" > /root/.irods/irods_environment.json && \
-        rm /home/extractor/packages.txt && \
         apt-get autoremove -y && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/*) || \
