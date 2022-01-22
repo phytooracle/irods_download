@@ -31,9 +31,7 @@ RUN apt-get install -y wget \
                        gcc \
                        gnupg
 
-RUN wget https://raw.githubusercontent.com/emmanuelgonz/emmanuelgonz.github.io/master/files/install_irods.sh 
-RUN chmod 755 install_irods.sh
-RUN bash install_irods.sh
+RUN bash /opt/install_irods.sh
 
 RUN [ -s /home/extractor/packages.txt ] && \
     (echo 'Installing packages' && \
