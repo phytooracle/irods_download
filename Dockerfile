@@ -31,15 +31,12 @@ RUN apt-get install -y wget \
                        gcc \
                        gnupg
 
-RUN bash /opt/install_irods.sh
+RUN 
 
-RUN [(echo 'Installing packages' && \
-        apt-get update && \
-        # cat /opt/packages.txt | xargs apt-get install -y --no-install-recommends && \
-        mkdir -p /root/.irods && \
-        echo "{ \"irods_zone_name\": \"iplant\", \"irods_host\": \"data.cyverse.org\", \"irods_port\": 1247, \"irods_user_name\": \"$IRODS_USER\" }" > /root/.irods/irods_environment.json && \
-        apt-get autoremove -y && \
-        apt-get clean && \
-        rm -rf /var/lib/apt/lists/*) || \
-    (echo 'No packages to install' && \
-        rm /home/extractor/packages.txt)
+RUN bash /opt/install_irods.sh && \
+    apt-get update && \
+    mkdir -p /root/.irods && \
+    echo "{ \"irods_zone_name\": \"iplant\", \"irods_host\": \"data.cyverse.org\", \"irods_port\": 1247, \"irods_user_name\": \"$IRODS_USER\" }" > /root/.irods/irods_environment.json && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
